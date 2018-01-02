@@ -46,10 +46,14 @@ var IssueTable = function (_React$Component2) {
 	_createClass(IssueTable, [{
 		key: 'render',
 		value: function render() {
-			var borderedStyle = { border: "1px solid silver", padding: 6 };
+			var issueRows = this.props.issues.map(function (issue) {
+				return React.createElement(IssueRow, { key: issue.id, issue: issue });
+			});
+			// table will grab attribute issues and map or loop through it.
+			//creating an issue element  which is a new row.  with 2 attributes.. a key and all the elements in the array
 			return React.createElement(
 				'table',
-				{ style: { borderCollapse: "collapse" } },
+				{ className: 'bordered-table' },
 				React.createElement(
 					'thead',
 					null,
@@ -58,12 +62,37 @@ var IssueTable = function (_React$Component2) {
 						null,
 						React.createElement(
 							'th',
-							{ style: borderedStyle },
+							null,
 							'Id'
 						),
 						React.createElement(
 							'th',
-							{ style: borderedStyle },
+							null,
+							'Status'
+						),
+						React.createElement(
+							'th',
+							null,
+							'Owner'
+						),
+						React.createElement(
+							'th',
+							null,
+							'Created'
+						),
+						React.createElement(
+							'th',
+							null,
+							'Effort'
+						),
+						React.createElement(
+							'th',
+							null,
+							'Completion Date'
+						),
+						React.createElement(
+							'th',
+							null,
 							'Title'
 						)
 					)
@@ -71,8 +100,7 @@ var IssueTable = function (_React$Component2) {
 				React.createElement(
 					'tbody',
 					null,
-					React.createElement(IssueRow, { issue_id: 1, issue_title: 'Error in console when clicking Add' }),
-					React.createElement(IssueRow, { issue_id: 2, issue_title: 'Missing bottom border on panel' })
+					issueRows
 				)
 			);
 		}
@@ -116,22 +144,57 @@ var IssueRow = function (_React$Component4) {
 	_createClass(IssueRow, [{
 		key: 'render',
 		value: function render() {
-			var borderedStyle = { border: "1px solid silver", padding: 4 };
+			var issue = this.props.issue;
 			return React.createElement(
 				'tr',
 				null,
 				React.createElement(
 					'td',
-					{ style: borderedStyle },
+					null,
 					' ',
-					this.props.issue_id,
+					issue.id,
 					' '
 				),
 				React.createElement(
 					'td',
-					{ style: borderedStyle },
+					null,
 					' ',
-					this.props.issue_title,
+					issue.status,
+					' '
+				),
+				React.createElement(
+					'td',
+					null,
+					' ',
+					issue.owner,
+					' '
+				),
+				React.createElement(
+					'td',
+					null,
+					' ',
+					issue.created.toDateString(),
+					' '
+				),
+				React.createElement(
+					'td',
+					null,
+					' ',
+					issue.effort,
+					' '
+				),
+				React.createElement(
+					'td',
+					null,
+					' ',
+					issue.completionDate ? issue.completionDate.toDateString() : '',
+					' '
+				),
+				React.createElement(
+					'td',
+					null,
+					' ',
+					issue.title,
 					' '
 				)
 			);
@@ -140,6 +203,24 @@ var IssueRow = function (_React$Component4) {
 
 	return IssueRow;
 }(React.Component);
+
+var issues = [{
+	id: 1,
+	status: 'Open',
+	owner: 'Emily Henderson',
+	created: new Date('2017-12-31'),
+	effort: 5,
+	completionDate: undefined,
+	title: 'Error in console when clicking Add'
+}, {
+	id: 2,
+	status: 'Assigned',
+	owner: 'Catherine Meltin',
+	created: new Date('2016-4-25'),
+	effort: 8,
+	completionDate: new Date('2005-10-22'),
+	title: 'Missing bottom border on panel'
+}];
 
 var IssueList = function (_React$Component5) {
 	_inherits(IssueList, _React$Component5);
@@ -153,6 +234,7 @@ var IssueList = function (_React$Component5) {
 	_createClass(IssueList, [{
 		key: 'render',
 		value: function render() {
+			// creat an attribute name issues and pass the array issues}
 			return React.createElement(
 				'div',
 				null,
@@ -163,7 +245,7 @@ var IssueList = function (_React$Component5) {
 				),
 				React.createElement(IssueFilter, null),
 				React.createElement('hr', null),
-				React.createElement(IssueTable, null),
+				React.createElement(IssueTable, { issues: issues }),
 				React.createElement('hr', null),
 				React.createElement(IssueAdd, null)
 			);
@@ -173,12 +255,8 @@ var IssueList = function (_React$Component5) {
 	return IssueList;
 }(React.Component);
 
-var testthis = React.createElement(
-	'h1',
-	null,
-	'This shows that native elements like an h1s dont need to be instantiated'
-);
-ReactDOM.render(testthis, contentNode2); //This is to show that a div or h1 are built in internal React componetns that can be directly instantiated
+//const testthis = <h1>This shows that native elements like an h1s dont need to be instantiated</h1>;
+//ReactDOM.render(testthis, contentNode2);   //This is to show that a div or h1 are built in internal React componetns that can be directly instantiated
 
 
 ReactDOM.render(React.createElement(IssueList, null), contentNode); //Render the component inside the content node
