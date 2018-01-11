@@ -50,6 +50,7 @@ class IssueAdd extends React.Component{
 
 class IssueRow extends React.Component{
 	render(){
+		console.log("hello");
 		const issue = this.props.issue;
 		return(
 			<tr>
@@ -90,9 +91,21 @@ const issues = [
 class IssueList extends React.Component {
 	constructor(){
 		super();
-		this.state = { issues: issues };
+		this.state = { issues: [] };
 		setTimeout(this.createTestIssue.bind(this), 2000);
+		//setTimeout(() => { this.createTestIssue }, 2000); this didnt work
 	}
+
+	componentDidMount(){
+		this.loadData();
+	}
+
+	loadData(){
+		setTimeout(() => {
+			this.setState({issues: issues})
+		})
+	}
+
 
 	createIssue(newIssue){
 		const newIssues = this.state.issues.slice();

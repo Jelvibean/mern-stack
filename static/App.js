@@ -144,6 +144,7 @@ var IssueRow = function (_React$Component4) {
 	_createClass(IssueRow, [{
 		key: 'render',
 		value: function render() {
+			console.log("hello");
 			var issue = this.props.issue;
 			return React.createElement(
 				'tr',
@@ -230,12 +231,27 @@ var IssueList = function (_React$Component5) {
 
 		var _this5 = _possibleConstructorReturn(this, (IssueList.__proto__ || Object.getPrototypeOf(IssueList)).call(this));
 
-		_this5.state = { issues: issues };
+		_this5.state = { issues: [] };
 		setTimeout(_this5.createTestIssue.bind(_this5), 2000);
+		//setTimeout(() => { this.createTestIssue }, 2000); this didnt work
 		return _this5;
 	}
 
 	_createClass(IssueList, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			this.loadData();
+		}
+	}, {
+		key: 'loadData',
+		value: function loadData() {
+			var _this6 = this;
+
+			setTimeout(function () {
+				_this6.setState({ issues: issues });
+			});
+		}
+	}, {
 		key: 'createIssue',
 		value: function createIssue(newIssue) {
 			var newIssues = this.state.issues.slice();
