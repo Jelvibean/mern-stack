@@ -46,6 +46,7 @@ var IssueTable = function (_React$Component2) {
 	_createClass(IssueTable, [{
 		key: 'render',
 		value: function render() {
+			// look at the tag on browser.
 			var issueRows = this.props.issues.map(function (issue) {
 				return React.createElement(IssueRow, { key: issue.id, issue: issue });
 			});
@@ -109,31 +110,8 @@ var IssueTable = function (_React$Component2) {
 	return IssueTable;
 }(React.Component);
 
-var IssueAdd = function (_React$Component3) {
-	_inherits(IssueAdd, _React$Component3);
-
-	function IssueAdd() {
-		_classCallCheck(this, IssueAdd);
-
-		return _possibleConstructorReturn(this, (IssueAdd.__proto__ || Object.getPrototypeOf(IssueAdd)).apply(this, arguments));
-	}
-
-	_createClass(IssueAdd, [{
-		key: 'render',
-		value: function render() {
-			return React.createElement(
-				'div',
-				null,
-				'This is a place holder for an Issue Add Entry form'
-			);
-		}
-	}]);
-
-	return IssueAdd;
-}(React.Component);
-
-var IssueRow = function (_React$Component4) {
-	_inherits(IssueRow, _React$Component4);
+var IssueRow = function (_React$Component3) {
+	_inherits(IssueRow, _React$Component3);
 
 	function IssueRow() {
 		_classCallCheck(this, IssueRow);
@@ -144,7 +122,6 @@ var IssueRow = function (_React$Component4) {
 	_createClass(IssueRow, [{
 		key: 'render',
 		value: function render() {
-			console.log("hello");
 			var issue = this.props.issue;
 			return React.createElement(
 				'tr',
@@ -205,6 +182,29 @@ var IssueRow = function (_React$Component4) {
 	return IssueRow;
 }(React.Component);
 
+var IssueAdd = function (_React$Component4) {
+	_inherits(IssueAdd, _React$Component4);
+
+	function IssueAdd() {
+		_classCallCheck(this, IssueAdd);
+
+		return _possibleConstructorReturn(this, (IssueAdd.__proto__ || Object.getPrototypeOf(IssueAdd)).apply(this, arguments));
+	}
+
+	_createClass(IssueAdd, [{
+		key: 'render',
+		value: function render() {
+			return React.createElement(
+				'div',
+				null,
+				'This is a place holder for an Issue Add Entry form'
+			);
+		}
+	}]);
+
+	return IssueAdd;
+}(React.Component);
+
 var issues = [{
 	id: 1,
 	status: 'Open',
@@ -232,8 +232,8 @@ var IssueList = function (_React$Component5) {
 		var _this5 = _possibleConstructorReturn(this, (IssueList.__proto__ || Object.getPrototypeOf(IssueList)).call(this));
 
 		_this5.state = { issues: [] };
-		setTimeout(_this5.createTestIssue.bind(_this5), 2000);
-		//setTimeout(() => { this.createTestIssue }, 2000); this didnt work
+		_this5.createTestIssue = _this5.createTestIssue.bind(_this5);
+		setTimeout(_this5.createTestIssue, 2000);
 		return _this5;
 	}
 
@@ -284,6 +284,11 @@ var IssueList = function (_React$Component5) {
 				React.createElement(IssueFilter, null),
 				React.createElement('hr', null),
 				React.createElement(IssueTable, { issues: this.state.issues }),
+				React.createElement(
+					'button',
+					{ onClick: this.createTestIssue },
+					'Add'
+				),
 				React.createElement('hr', null),
 				React.createElement(IssueAdd, null)
 			);
@@ -292,9 +297,5 @@ var IssueList = function (_React$Component5) {
 
 	return IssueList;
 }(React.Component);
-
-//const testthis = <h1>This shows that native elements like an h1s dont need to be instantiated</h1>;
-//ReactDOM.render(testthis, contentNode2);   //This is to show that a div or h1 are built in internal React componetns that can be directly instantiated
-
 
 ReactDOM.render(React.createElement(IssueList, null), contentNode); //Render the component inside the content node

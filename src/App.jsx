@@ -15,7 +15,7 @@ class IssueFilter extends React.Component{
 
 
 class IssueTable extends React.Component {
-	render(){
+	render(){											// look at the tag on browser.
 		const issueRows = this.props.issues.map(issue=> <IssueRow key={issue.id} issue={issue} />)
 		// table will grab attribute issues and map or loop through it.
 		//creating an issue element  which is a new row.  with 2 attributes.. a key and all the elements in the array
@@ -40,17 +40,8 @@ class IssueTable extends React.Component {
 	}
 }
 
-class IssueAdd extends React.Component{
-	render() {
-		return (
-			<div>This is a place holder for an Issue Add Entry form</div>
-		);
-	}
-}
-
 class IssueRow extends React.Component{
 	render(){
-		console.log("hello");
 		const issue = this.props.issue;
 		return(
 			<tr>
@@ -65,6 +56,16 @@ class IssueRow extends React.Component{
 		)
 	}
 }
+
+class IssueAdd extends React.Component{
+	render() {
+		return (
+			<div>This is a place holder for an Issue Add Entry form</div>
+		);
+	}
+}
+
+
 
 const issues = [
 	{
@@ -92,8 +93,8 @@ class IssueList extends React.Component {
 	constructor(){
 		super();
 		this.state = { issues: [] };
-		setTimeout(this.createTestIssue.bind(this), 2000);
-		//setTimeout(() => { this.createTestIssue }, 2000); this didnt work
+		this.createTestIssue = this.createTestIssue.bind(this);
+		setTimeout(this.createTestIssue, 2000);
 	}
 
 	componentDidMount(){
@@ -130,18 +131,14 @@ class IssueList extends React.Component {
 				<h1>Issue Tracker</h1>
 				<IssueFilter/>
 				<hr/>
-				<IssueTable issues={this.state.issues}/>  
+				<IssueTable issues={this.state.issues}/> 
+				<button onClick={this.createTestIssue}>Add</button> 
 				<hr/>
 				<IssueAdd/>
 			</div>	
 		);
 	}
 }
-
-
-//const testthis = <h1>This shows that native elements like an h1s dont need to be instantiated</h1>;
-//ReactDOM.render(testthis, contentNode2);   //This is to show that a div or h1 are built in internal React componetns that can be directly instantiated
-
 
 ReactDOM.render(<IssueList/>, contentNode);  //Render the component inside the content node
 
