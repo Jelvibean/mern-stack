@@ -34,8 +34,31 @@ var IssueFilter = function (_React$Component) {
 	return IssueFilter;
 }(React.Component);
 
-var IssueTable = function (_React$Component2) {
-	_inherits(IssueTable, _React$Component2);
+var IssueAdd = function (_React$Component2) {
+	_inherits(IssueAdd, _React$Component2);
+
+	function IssueAdd() {
+		_classCallCheck(this, IssueAdd);
+
+		return _possibleConstructorReturn(this, (IssueAdd.__proto__ || Object.getPrototypeOf(IssueAdd)).apply(this, arguments));
+	}
+
+	_createClass(IssueAdd, [{
+		key: 'render',
+		value: function render() {
+			return React.createElement(
+				'div',
+				null,
+				'This is a place holder for an Issue Add Entry form'
+			);
+		}
+	}]);
+
+	return IssueAdd;
+}(React.Component);
+
+var IssueTable = function (_React$Component3) {
+	_inherits(IssueTable, _React$Component3);
 
 	function IssueTable() {
 		_classCallCheck(this, IssueTable);
@@ -46,7 +69,7 @@ var IssueTable = function (_React$Component2) {
 	_createClass(IssueTable, [{
 		key: 'render',
 		value: function render() {
-			// look at the tag on browser.
+			//this is the array being looped -- look at the tag on browser.
 			var issueRows = this.props.issues.map(function (issue) {
 				return React.createElement(IssueRow, { key: issue.id, issue: issue });
 			});
@@ -110,8 +133,8 @@ var IssueTable = function (_React$Component2) {
 	return IssueTable;
 }(React.Component);
 
-var IssueRow = function (_React$Component3) {
-	_inherits(IssueRow, _React$Component3);
+var IssueRow = function (_React$Component4) {
+	_inherits(IssueRow, _React$Component4);
 
 	function IssueRow() {
 		_classCallCheck(this, IssueRow);
@@ -182,29 +205,6 @@ var IssueRow = function (_React$Component3) {
 	return IssueRow;
 }(React.Component);
 
-var IssueAdd = function (_React$Component4) {
-	_inherits(IssueAdd, _React$Component4);
-
-	function IssueAdd() {
-		_classCallCheck(this, IssueAdd);
-
-		return _possibleConstructorReturn(this, (IssueAdd.__proto__ || Object.getPrototypeOf(IssueAdd)).apply(this, arguments));
-	}
-
-	_createClass(IssueAdd, [{
-		key: 'render',
-		value: function render() {
-			return React.createElement(
-				'div',
-				null,
-				'This is a place holder for an Issue Add Entry form'
-			);
-		}
-	}]);
-
-	return IssueAdd;
-}(React.Component);
-
 var issues = [{
 	id: 1,
 	status: 'Open',
@@ -237,11 +237,17 @@ var IssueList = function (_React$Component5) {
 		return _this5;
 	}
 
+	// initial method
+
+
 	_createClass(IssueList, [{
 		key: 'componentDidMount',
 		value: function componentDidMount() {
 			this.loadData();
 		}
+
+		// method 2 this sets the state line 95 to the array line 70
+
 	}, {
 		key: 'loadData',
 		value: function loadData() {
@@ -272,7 +278,7 @@ var IssueList = function (_React$Component5) {
 	}, {
 		key: 'render',
 		value: function render() {
-			// creat an attribute name issues and pass the array issues}
+			// now you have state set and you can pass it to the IssueTable
 			return React.createElement(
 				'div',
 				null,

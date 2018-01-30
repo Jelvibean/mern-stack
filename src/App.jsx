@@ -11,11 +11,19 @@ class IssueFilter extends React.Component{
 	}
 }
 
+class IssueAdd extends React.Component{
+	render() {
+		return (
+			<div>This is a place holder for an Issue Add Entry form</div>
+		);
+	}
+}
+
 
 
 
 class IssueTable extends React.Component {
-	render(){											// look at the tag on browser.
+	render(){				//this is the array being looped -- look at the tag on browser.
 		const issueRows = this.props.issues.map(issue=> <IssueRow key={issue.id} issue={issue} />)
 		// table will grab attribute issues and map or loop through it.
 		//creating an issue element  which is a new row.  with 2 attributes.. a key and all the elements in the array
@@ -57,13 +65,7 @@ class IssueRow extends React.Component{
 	}
 }
 
-class IssueAdd extends React.Component{
-	render() {
-		return (
-			<div>This is a place holder for an Issue Add Entry form</div>
-		);
-	}
-}
+
 
 
 
@@ -92,15 +94,17 @@ const issues = [
 class IssueList extends React.Component {
 	constructor(){
 		super();
-		this.state = { issues: [] };
+		this.state = { issues: [] }; 
 		this.createTestIssue = this.createTestIssue.bind(this);
 		setTimeout(this.createTestIssue, 2000);
 	}
 
+	// initial method
 	componentDidMount(){
 		this.loadData();
 	}
 
+	// method 2 this sets the state line 95 to the array line 70
 	loadData(){
 		setTimeout(() => {
 			this.setState({issues: issues})
@@ -125,13 +129,13 @@ class IssueList extends React.Component {
 	}
 
 	render() {
-		// creat an attribute name issues and pass the array issues}
+		// now you have state set and you can pass it to the IssueTable
 		return (
 			<div>
 				<h1>Issue Tracker</h1>
 				<IssueFilter/>
 				<hr/>
-				<IssueTable issues={this.state.issues}/> 
+				<IssueTable issues={this.state.issues}/>  
 				<button onClick={this.createTestIssue}>Add</button> 
 				<hr/>
 				<IssueAdd/>
